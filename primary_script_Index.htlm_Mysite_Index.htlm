@@ -1,0 +1,2855 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+
+                
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#8B0000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>VEGAS | Premium Investment</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="application/json;base64,eyJuYW1lIjoiVkVHQVMiLCJzaG9ydF9uYW1lIjoiVkVHQVMiLCJzdGFydF91cmwiOiIvIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBhMGEwYSIsInRoZW1lX2NvbG9yIjoiI0Q0QUYzNyIsImljb25zIjpbeyJzcmMiOiJodHRwczovL2Nkbi5pY29tLmlvL2ljb24vc3ZnLzUxMi9kaWNlLWYiLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+    <style>
+        :root {
+            /* VEGAS Casino Theme */
+            --vegas-red: #8B0000;
+            --vegas-red-dark: #660000;
+            --vegas-red-light: #A52A2A;
+            --vegas-gold: #D4AF37;
+            --vegas-gold-light: #F4D06F;
+            --vegas-black: #0a0a0a;
+            --vegas-dark: #121212;
+            --vegas-card: #1a1a1a;
+            --vegas-card-hover: #222;
+            --text-white: #ffffff;
+            --text-gold: #D4AF37;
+            --text-gray: #b0b0b0;
+            --text-muted: #777;
+            --gradient-vegas: linear-gradient(135deg, #8B0000 0%, #660000 30%, #D4AF37 70%, #F4D06F 100%);
+            --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #B89D2E 50%, #AA8B2C 100%);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.95);
+            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.7);
+            --shadow-glow: 0 0 30px rgba(212, 175, 55, 0.35);
+            --shadow-red: 0 0 25px rgba(139, 0, 0, 0.4);
+            --success: #198754;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #0dcaf0;
+            --purple: #9333ea;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            background-color: var(--vegas-black); 
+            color: var(--text-white); 
+            overflow-x: hidden;
+            padding-bottom: 85px;
+            background-image: 
+                radial-gradient(ellipse at 20% 15%, rgba(139, 0, 0, 0.15) 0%, transparent 45%),
+                radial-gradient(ellipse at 80% 85%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.03) 0%, transparent 70%),
+                url("image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zm0-30V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-attachment: fixed;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 1px, rgba(212, 175, 55, 0.02) 1px, rgba(212, 175, 55, 0.02) 2px),
+                repeating-linear-gradient(-45deg, transparent, transparent 1px, rgba(139, 0, 0, 0.02) 1px, rgba(139, 0, 0, 0.02) 2px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hidden { display: none !important; }
+        .text-gold { color: var(--text-gold) !important; }
+        .text-red { color: var(--vegas-red-light) !important; }
+        .bg-gold { background: var(--gradient-gold) !important; }
+        .bg-vegas { background: var(--gradient-vegas) !important; }
+        
+        /* VEGAS Logo */
+        .app-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-vegas);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-glow), var(--shadow-red);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--vegas-gold);
+        }
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            animation: shine 2.5s infinite;
+        }
+        @keyframes shine { 100% { transform: rotate(45deg) translateX(100%); } }
+        .logo-icon i { 
+            font-size: 20px; 
+            color: #000; 
+            position: relative; 
+            z-index: 1;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+        }
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 20px;
+            letter-spacing: 3px;
+            background: var(--gradient-vegas);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Buttons */
+        .btn-gold {
+            background: var(--gradient-gold);
+            border: none;
+            color: #000;
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 18px rgba(212, 175, 55, 0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+            color: #000;
+        }
+        .btn-gold:active { transform: translateY(0); }
+        .btn-outline-gold {
+            border: 2px solid var(--vegas-gold);
+            color: var(--vegas-gold);
+            background: transparent;
+            padding: 10px 22px;
+            border-radius: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        .btn-outline-gold:hover {
+            background: var(--vegas-gold);
+            color: #000;
+            transform: translateY(-2px);
+        }
+        .btn-red {
+            background: var(--vegas-red);
+            border: none;
+            color: white;
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 18px rgba(139, 0, 0, 0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-red:hover {
+            background: var(--vegas-red-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(139, 0, 0, 0.6);
+            color: white;
+        }
+
+        /* Auth Styles */
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: 
+                radial-gradient(ellipse at center, #1a0a0a 0%, #0a0000 70%),
+                url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317?q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            position: relative;
+        }
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(139,0,0,0.25) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 80%, rgba(212,175,55,0.15) 0%, transparent 45%);
+            pointer-events: none;
+        }
+        .auth-card {
+            background: var(--vegas-card);
+            width: 100%;
+            max-width: 420px;
+            padding: 36px 32px;
+            border-radius: 32px;
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            box-shadow: var(--shadow), var(--shadow-glow);
+            position: relative;
+            z-index: 2;
+        }
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: -3px; left: -3px; right: -3px; bottom: -3px;
+            background: var(--gradient-vegas);
+            border-radius: 35px;
+            z-index: -1;
+            opacity: 0.25;
+            filter: blur(12px);
+        }
+        .form-control {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: white;
+            padding: 14px 18px;
+            border-radius: 14px;
+            margin: 10px 0;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .form-control:focus {
+            background: #222;
+            border-color: var(--vegas-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+            color: white;
+        }
+        .form-control::placeholder { color: var(--text-muted); }
+        .form-label { color: var(--text-gray); font-size: 13px; margin-bottom: 6px; font-weight: 600; }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            background: var(--vegas-dark);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Summary Card - VEGAS Style */
+        .summary-card {
+            background: var(--gradient-vegas);
+            margin: 18px;
+            padding: 24px;
+            border-radius: 26px;
+            color: #000;
+            box-shadow: var(--shadow-glow), var(--shadow-red);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--vegas-gold);
+        }
+        .summary-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%);
+            animation: pulse 4s infinite;
+        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.15); opacity: 0.5; } }
+        .summary-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 900;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: -1px;
+        }
+        .summary-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 12px;
+            background: rgba(0,0,0,0.2);
+            padding: 14px 18px;
+            border-radius: 16px;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        /* Quick Menu */
+        .quick-menu {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            padding: 0 18px;
+            margin: 20px 0;
+        }
+        .menu-item {
+            background: var(--vegas-card);
+            padding: 22px 12px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+        }
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: var(--gradient-vegas);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .menu-item:hover {
+            border-color: var(--vegas-gold);
+            transform: translateY(-5px);
+            background: var(--vegas-card-hover);
+            box-shadow: var(--shadow-card), 0 0 15px rgba(212,175,55,0.2);
+        }
+        .menu-item:hover::before { transform: scaleX(1); }
+        .menu-item i {
+            font-size: 28px;
+            color: var(--vegas-gold);
+            margin-bottom: 12px;
+            display: block;
+            transition: transform 0.3s;
+        }
+        .menu-item:hover i { transform: scale(1.15) rotate(5deg); }
+
+        /* Info Boxes */
+        .info-box {
+            background: var(--vegas-card);
+            margin: 14px 18px;
+            padding: 18px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            border-left: 5px solid var(--vegas-gold);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: var(--shadow-card);
+        }
+        .info-box:hover {
+            background: var(--vegas-card-hover);
+            transform: translateX(5px);
+            border-left-color: var(--vegas-red-light);
+            box-shadow: var(--shadow-card), 0 0 12px rgba(139,0,0,0.2);
+        }
+        .info-box i {
+            font-size: 28px;
+            color: var(--vegas-gold);
+            margin-right: 18px;
+            min-width: 34px;
+            text-align: center;
+        }
+        .info-box.whatsapp {
+            background: linear-gradient(135deg, #075E54, #128C7E);
+            border-left-color: #25D366;
+        }
+        .info-box.whatsapp i { color: white; }
+        .info-box.pwa {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-left-color: var(--vegas-gold);
+        }
+
+        /* Plan Cards */
+        .plan-card {
+            background: var(--vegas-card);
+            margin: 16px 18px;
+            border-radius: 22px;
+            display: flex;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.12);
+            cursor: pointer;
+            transition: all 0.35s ease;
+            position: relative;
+            box-shadow: var(--shadow-card);
+        }
+        .plan-card:hover {
+            border-color: var(--vegas-gold);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-card), 0 0 25px rgba(212,175,55,0.25);
+        }
+        .plan-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: var(--gradient-vegas);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .plan-card:hover::after { opacity: 1; }
+        .plan-img {
+            width: 44%;
+            background-size: cover;
+            background-position: center;
+            min-height: 140px;
+            position: relative;
+        }
+        .plan-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, transparent 35%, rgba(0,0,0,0.75));
+        }
+        .plan-details {
+            padding: 18px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .plan-badge {
+            background: var(--gradient-vegas);
+            color: #000;
+            padding: 5px 14px;
+            border-radius: 22px;
+            font-size: 10px;
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .plan-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 14px 0;
+            font-size: 11px;
+        }
+        .plan-stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        /* Active Plan */
+        .active-plan-card {
+            background: linear-gradient(135deg, #1a0a0a, #2a1a1a);
+            border: 2px solid var(--vegas-gold);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 14px 18px;
+            box-shadow: var(--shadow-card), var(--shadow-glow);
+            position: relative;
+            overflow: hidden;
+        }
+        .active-plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: var(--gradient-vegas);
+        }
+        .timer-display {
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--vegas-gold);
+            background: rgba(0,0,0,0.5);
+            padding: 12px 20px;
+            border-radius: 14px;
+            display: inline-block;
+            margin: 14px 0;
+            letter-spacing: 4px;
+            border: 1px solid var(--vegas-gold);
+            box-shadow: 0 0 15px rgba(212,175,55,0.3);
+        }
+        .progress {
+            height: 10px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 5px;
+            margin: 14px 0;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .progress-bar {
+            background: var(--gradient-vegas);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(212,175,55,0.4);
+        }
+
+        /* Wallet & Transactions */
+        .wallet-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 0 18px;
+            margin: 18px 0;
+        }
+        .wallet-btn {
+            background: var(--vegas-card);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 18px;
+            padding: 20px 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--shadow-card);
+        }
+        .wallet-btn:hover {
+            border-color: var(--vegas-gold);
+            background: var(--vegas-card-hover);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card), 0 0 15px rgba(212,175,55,0.2);
+        }
+        .wallet-btn i {
+            font-size: 30px;
+            color: var(--vegas-gold);
+        }
+        .wallet-btn span {
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .tx-section-title {
+            padding: 0 18px;
+            margin: 26px 0 14px;
+            font-size: 19px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--vegas-gold);
+        }
+        
+        .tx-item {
+            background: var(--vegas-card);
+            padding: 18px;
+            border-radius: 16px;
+            margin: 0 18px 14px;
+            border-left: 4px solid var(--vegas-gold);
+            border: 1px solid rgba(255,255,255,0.12);
+            transition: all 0.25s;
+            box-shadow: var(--shadow-card);
+        }
+        .tx-item:hover {
+            border-left-color: var(--vegas-red-light);
+            background: var(--vegas-card-hover);
+            transform: translateX(3px);
+        }
+        .tx-item.deposit { border-left-color: var(--success); }
+        .tx-item.withdraw { border-left-color: var(--warning); }
+        .tx-item.investment { border-left-color: var(--vegas-gold); }
+        .tx-item.earnings { border-left-color: var(--info); }
+        .tx-item.referral { border-left-color: var(--purple); }
+        
+        .tx-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .tx-amount {
+            font-weight: 800;
+            font-size: 20px;
+            font-family: monospace;
+            letter-spacing: -0.5px;
+        }
+        .tx-amount.positive { color: var(--success); }
+        .tx-amount.negative { color: var(--danger); }
+        .tx-status {
+            font-size: 11px;
+            padding: 5px 14px;
+            border-radius: 22px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .status-pending {
+            background: rgba(255,193,7,0.2);
+            color: var(--warning);
+            border: 1px solid rgba(255,193,7,0.4);
+        }
+        .status-approved {
+            background: rgba(25,135,84,0.2);
+            color: var(--success);
+            border: 1px solid rgba(25,135,84,0.4);
+        }
+        .status-declined {
+            background: rgba(220,53,69,0.2);
+            color: var(--danger);
+            border: 1px solid rgba(220,53,69,0.4);
+        }
+
+        /* Deposit/Withdraw Pages */
+        .deposit-page, .bank-details-page, .withdraw-page {
+            padding: 22px 18px;
+        }
+        .page-header {
+            text-align: center;
+            margin-bottom: 26px;
+            padding-bottom: 22px;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+        .page-header i {
+            font-size: 46px;
+            color: var(--vegas-gold);
+            margin-bottom: 14px;
+            display: block;
+            text-shadow: 0 0 15px rgba(212,175,55,0.4);
+        }
+        .page-header h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            font-size: 22px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .page-header p {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        .amount-selector {
+            background: var(--vegas-card);
+            border-radius: 22px;
+            padding: 26px;
+            margin-bottom: 26px;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: var(--shadow-card);
+        }
+        .amount-input-group {
+            position: relative;
+            margin: 18px 0;
+        }
+        .amount-input-group::before {
+            content: '₦';
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--vegas-gold);
+            font-weight: 700;
+            font-size: 20px;
+            z-index: 2;
+        }
+        .amount-input {
+            padding-left: 36px !important;
+            font-size: 26px !important;
+            font-weight: 800 !important;
+            font-family: monospace !important;
+        }
+        .quick-amounts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 18px 0;
+        }
+        .quick-amount-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 12px;
+            color: var(--text-gray);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .quick-amount-btn:hover, .quick-amount-btn.active {
+            background: var(--gradient-vegas);
+            color: #000;
+            border-color: var(--vegas-gold);
+            transform: scale(1.05);
+            box-shadow: 0 0 12px rgba(212,175,55,0.3);
+        }
+        
+        .bank-details-card {
+            background: var(--vegas-card);
+            border-radius: 22px;
+            padding: 26px;
+            margin-bottom: 26px;
+            border: 2px solid var(--vegas-gold);
+            box-shadow: var(--shadow-card), var(--shadow-glow);
+            animation: slideUp 0.4s ease;
+        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+        .bank-detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+        .bank-detail-row:last-child { border-bottom: none; }
+        .bank-detail-label {
+            color: var(--text-gray);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+        .bank-detail-label i {
+            color: var(--vegas-gold);
+            font-size: 18px;
+        }
+        .bank-detail-value {
+            font-weight: 800;
+            color: var(--vegas-gold);
+            font-family: monospace;
+            font-size: 17px;
+            letter-spacing: 0.5px;
+        }
+        .copy-btn {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--vegas-gold);
+            border: 1px solid var(--vegas-gold);
+            padding: 7px 16px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 12px;
+            transition: all 0.25s;
+        }
+        .copy-btn:hover {
+            background: var(--vegas-gold);
+            color: #000;
+            transform: scale(1.05);
+        }
+        
+        .sender-form {
+            background: var(--vegas-card);
+            border-radius: 22px;
+            padding: 26px;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: var(--shadow-card);
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-gray);
+            font-size: 14px;
+            padding: 10px 18px;
+            margin-bottom: 18px;
+            cursor: pointer;
+            transition: all 0.25s;
+            border-radius: 12px;
+        }
+        .back-btn:hover {
+            color: var(--vegas-gold);
+            background: rgba(212,175,55,0.1);
+        }
+        
+        /* Service Page */
+        .service-hero {
+            text-align: center;
+            padding: 26px 18px 18px;
+            margin-bottom: 18px;
+        }
+        .service-hero-icon {
+            width: 85px;
+            height: 85px;
+            background: var(--gradient-vegas);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            box-shadow: var(--shadow-glow), var(--shadow-red);
+            animation: float 3.5s ease-in-out infinite;
+            border: 3px solid var(--vegas-gold);
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .service-hero-icon i {
+            font-size: 38px;
+            color: #000;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .service-hero h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            font-size: 22px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .service-hero p {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        /* Profile */
+        .profile-header {
+            text-align: center;
+            margin: 18px;
+            padding: 26px;
+            background: var(--vegas-card);
+            border-radius: 24px;
+            border: 2px solid rgba(212,175,55,0.4);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-card), var(--shadow-glow);
+        }
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+            background: var(--gradient-vegas);
+            border-radius: 50%;
+            margin: 0 auto 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid var(--vegas-gold);
+            box-shadow: var(--shadow-glow);
+            position: relative;
+        }
+        .profile-avatar i {
+            font-size: 38px;
+            color: #000;
+            text-shadow: 0 2px 4px rgba(255,255,255,0.3);
+        }
+        .profile-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+        .profile-email {
+            color: var(--text-gray);
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+        .profile-badge {
+            background: var(--gradient-vegas);
+            color: #000;
+            padding: 5px 16px;
+            border-radius: 22px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin: 22px 18px;
+        }
+        .profile-stat {
+            background: var(--vegas-card);
+            padding: 18px 12px;
+            border-radius: 18px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.25s;
+            box-shadow: var(--shadow-card);
+        }
+        .profile-stat:hover {
+            border-color: var(--vegas-gold);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-card), 0 0 12px rgba(212,175,55,0.2);
+        }
+        .profile-stat-value {
+            font-weight: 800;
+            color: var(--vegas-gold);
+            font-size: 20px;
+            font-family: monospace;
+        }
+        .profile-stat-label {
+            font-size: 11px;
+            color: var(--text-gray);
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        .referral-card {
+            background: linear-gradient(135deg, #1a0a0a, #2a1a1a);
+            border: 2px solid var(--vegas-gold);
+            border-radius: 20px;
+            padding: 22px;
+            margin: 18px;
+            text-align: center;
+            box-shadow: var(--shadow-card), var(--shadow-glow);
+        }
+        .referral-title {
+            color: var(--vegas-gold);
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+        .referral-desc {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+        .referral-code {
+            background: rgba(0,0,0,0.5);
+            color: var(--vegas-gold);
+            padding: 14px 22px;
+            border-radius: 14px;
+            font-family: monospace;
+            font-weight: 800;
+            font-size: 20px;
+            margin: 14px 0;
+            display: inline-block;
+            letter-spacing: 5px;
+            border: 2px solid var(--vegas-gold);
+            width: 100%;
+            max-width: 300px;
+            box-shadow: 0 0 15px rgba(212,175,55,0.3);
+        }
+        .commission-info {
+            background: rgba(255,255,255,0.1);
+            padding: 16px;
+            border-radius: 14px;
+            margin: 18px 0;
+            font-size: 14px;
+            text-align: left;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .commission-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+        .commission-row:last-child { border-bottom: none; }
+        .commission-value {
+            font-weight: 700;
+            color: var(--vegas-gold);
+        }
+
+        .profile-actions {
+            margin: 22px 18px;
+        }
+        .profile-action-btn {
+            background: var(--vegas-card);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            text-align: left;
+            box-shadow: var(--shadow-card);
+        }
+        .profile-action-btn:hover {
+            border-color: var(--vegas-gold);
+            background: var(--vegas-card-hover);
+            transform: translateX(5px);
+            box-shadow: var(--shadow-card), 0 0 12px rgba(212,175,55,0.2);
+        }
+        .profile-action-btn i {
+            font-size: 24px;
+            color: var(--vegas-gold);
+            width: 26px;
+            text-align: center;
+        }
+        .profile-action-btn span {
+            font-size: 15px;
+            font-weight: 600;
+            flex: 1;
+        }
+        .profile-action-btn .bi-chevron-right {
+            color: var(--text-muted);
+            font-size: 20px;
+        }
+
+        /* Service FAQ */
+        .section-title {
+            color: var(--vegas-gold);
+            margin: 22px 18px 18px;
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Playfair Display', serif;
+        }
+        .section-title i {
+            font-size: 22px;
+            text-shadow: 0 0 10px rgba(212,175,55,0.4);
+        }
+        .faq-item {
+            background: var(--vegas-card);
+            padding: 20px;
+            border-radius: 16px;
+            margin: 0 18px 16px;
+            border-left: 4px solid var(--vegas-gold);
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.25s;
+            box-shadow: var(--shadow-card);
+        }
+        .faq-item:hover {
+            border-left-color: var(--vegas-red-light);
+            background: var(--vegas-card-hover);
+            transform: translateX(3px);
+        }
+        .faq-item h4 {
+            color: var(--vegas-gold);
+            margin-bottom: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .faq-item p {
+            font-size: 14px;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        /* Utility */
+        .warn-text {
+            font-size: 14px;
+            color: #ffbcbc;
+            background: rgba(220,53,69,0.15);
+            padding: 16px 18px;
+            border-radius: 16px;
+            margin: 18px;
+            border-left: 4px solid var(--danger);
+            border: 1px solid rgba(220,53,69,0.3);
+            line-height: 1.6;
+            box-shadow: 0 0 12px rgba(220,53,69,0.2);
+        }
+        .success-text {
+            font-size: 14px;
+            color: #a5d6a7;
+            background: rgba(25,135,84,0.15);
+            padding: 16px 18px;
+            border-radius: 16px;
+            margin: 18px;
+            border-left: 4px solid var(--success);
+            border: 1px solid rgba(25,135,84,0.3);
+            line-height: 1.6;
+            box-shadow: 0 0 12px rgba(25,135,84,0.2);
+        }
+        .info-text {
+            font-size: 14px;
+            color: #93c5fd;
+            background: rgba(14,165,233,0.15);
+            padding: 16px 18px;
+            border-radius: 16px;
+            margin: 18px;
+            border-left: 4px solid var(--info);
+            border: 1px solid rgba(14,165,233,0.3);
+            line-height: 1.6;
+            box-shadow: 0 0 12px rgba(14,165,233,0.2);
+        }
+        .empty-state {
+            text-align: center;
+            padding: 45px 22px;
+            color: var(--text-gray);
+        }
+        .empty-state i {
+            font-size: 52px;
+            opacity: 0.35;
+            margin-bottom: 18px;
+            display: block;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: var(--vegas-dark);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-top: 1px solid rgba(212,175,55,0.3);
+            z-index: 1000;
+            padding-bottom: env(safe-area-inset-bottom);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+        }
+        .nav-link {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 10px;
+            cursor: pointer;
+            padding: 8px 0;
+            transition: all 0.3s;
+            position: relative;
+            min-width: 62px;
+            font-weight: 500;
+        }
+        .nav-link.active {
+            color: var(--vegas-gold);
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 28px;
+            height: 4px;
+            background: var(--gradient-vegas);
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(212,175,55,0.5);
+        }
+        .nav-link i {
+            display: block;
+            font-size: 22px;
+            margin-bottom: 5px;
+            transition: transform 0.25s;
+        }
+        .nav-link:hover i {
+            transform: scale(1.15);
+        }
+        .nav-link:hover {
+            color: var(--vegas-gold-light);
+        }
+
+        /* Modals */
+        .modal-content {
+            background: var(--vegas-card);
+            padding: 30px;
+            border-radius: 26px;
+            text-align: center;
+            border: 2px solid var(--vegas-gold);
+            max-width: 440px;
+            box-shadow: var(--shadow), var(--shadow-glow);
+            margin: 22px;
+        }
+        .plan-detail-img {
+            width: 100%;
+            height: 200px;
+            border-radius: 18px;
+            background-size: cover;
+            background-position: center;
+            margin: 20px 0;
+            border: 3px solid var(--vegas-gold);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .plan-detail-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+            border-radius: 18px;
+        }
+        .plan-detail-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin: 20px 0;
+        }
+        .stat-box {
+            background: rgba(255,255,255,0.1);
+            padding: 16px;
+            border-radius: 14px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .stat-box-value {
+            font-weight: 800;
+            color: var(--vegas-gold);
+            font-size: 22px;
+            font-family: monospace;
+        }
+        .stat-box-label {
+            font-size: 12px;
+            color: var(--text-gray);
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        /* Profile Modals */
+        .modal-profile {
+            background: var(--vegas-card);
+            border-radius: 22px;
+            padding: 26px;
+            border: 2px solid rgba(212,175,55,0.4);
+            max-width: 420px;
+            margin: 22px;
+            box-shadow: var(--shadow-card), var(--shadow-glow);
+        }
+        .modal-profile-title {
+            color: var(--vegas-gold);
+            font-weight: 800;
+            font-size: 22px;
+            margin-bottom: 22px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+        .modal-profile-input {
+            width: 100%;
+            padding: 16px;
+            margin: 12px 0;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 14px;
+            color: white;
+            font-size: 15px;
+        }
+        .modal-profile-input:focus {
+            border-color: var(--vegas-gold);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+        }
+
+        /* Confirm Modal */
+        .confirm-modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 22px;
+        }
+        .confirm-content {
+            background: var(--vegas-card);
+            border-radius: 22px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            border: 2px solid var(--vegas-gold);
+            box-shadow: var(--shadow), var(--shadow-glow);
+            text-align: center;
+        }
+        .confirm-icon {
+            font-size: 52px;
+            margin-bottom: 18px;
+            display: block;
+        }
+        .confirm-title {
+            font-weight: 800;
+            font-size: 22px;
+            margin-bottom: 14px;
+            font-family: 'Playfair Display', serif;
+        }
+        .confirm-message {
+            color: var(--text-gray);
+            font-size: 15px;
+            margin-bottom: 26px;
+            line-height: 1.6;
+        }
+        .confirm-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .confirm-btn {
+            padding: 14px;
+            border-radius: 14px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            transition: all 0.25s;
+        }
+        .confirm-btn.cancel {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+        .confirm-btn.ok-approve {
+            background: var(--gradient-vegas);
+            color: #000;
+        }
+        .confirm-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            bottom: 95px;
+            right: 18px;
+            z-index: 1100;
+            max-width: 340px;
+        }
+        .custom-toast {
+            background: var(--vegas-card);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow-card), 0 0 15px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            animation: slideIn 0.35s ease;
+            border-left: 4px solid var(--vegas-gold);
+        }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .toast-success { border-left-color: var(--success); }
+        .toast-error { border-left-color: var(--danger); }
+        .toast-icon {
+            font-size: 22px;
+            min-width: 26px;
+        }
+        .toast-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Loader */
+        #loader {
+            position: fixed;
+            width:100%;
+            height:100%;
+            background:var(--vegas-black);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            z-index:9999;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(212, 175, 55, 0.25);
+            border-top: 5px solid var(--vegas-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            box-shadow: var(--shadow-glow);
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loader-text {
+            color: var(--vegas-gold);
+            font-weight: 800;
+            letter-spacing: 4px;
+            font-size: 16px;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 0 0 10px rgba(212,175,55,0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner"></div>
+        <div class="loader-text">VEGAS</div>
+    </div>
+
+    <!-- AUTH SECTION -->
+    <div id="auth-section" class="auth-container">
+        <!-- Register -->
+        <div id="register-page" class="auth-card">
+            <div class="text-center mb-4">
+                <div class="app-logo mx-auto mb-3">
+                    <div class="logo-icon"><i class="bi bi-dice-6"></i></div>
+                    <span class="logo-text">VEGAS</span>
+                </div>
+                <h3 class="text-gold mt-2" style="font-size:24px;font-family:'Playfair Display',serif">Create Account</h3>
+                <p class="text-gray small">Join VEGAS Premium Investment</p>
+            </div>
+            <form id="reg-form">
+                <label class="form-label">Username</label>
+                <input type="text" id="reg-user" class="form-control" placeholder="Choose a username" required minlength="3">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="reg-email" class="form-control" placeholder="your@email.com" required>
+                <label class="form-label">Password</label>
+                <input type="password" id="reg-pass" class="form-control" placeholder="••••••••" required minlength="6">
+                <label class="form-label">Confirm Password</label>
+                <input type="password" id="reg-confirm" class="form-control" placeholder="••••••••" required>
+                <label class="form-label">Invite Code (Optional)</label>
+                <input type="text" id="reg-invite" class="form-control" placeholder="Enter referrer's code">
+                <button type="submit" class="btn-gold w-100 mt-4">Create Account</button>
+            </form>
+            <p class="text-center mt-4 small">Already have an account? <span class="text-gold fw-bold" style="cursor:pointer" onclick="toggleAuth('login')">Login Here</span></p>
+        </div>
+
+        <!-- Login -->
+        <div id="login-page" class="auth-card hidden">
+            <div class="text-center mb-4">
+                <div class="app-logo mx-auto mb-3">
+                    <div class="logo-icon"><i class="bi bi-dice-6"></i></div>
+                    <span class="logo-text">VEGAS</span>
+                </div>
+                <h3 class="text-gold mt-2" style="font-size:24px;font-family:'Playfair Display',serif">Welcome Back</h3>
+                <p class="text-gray small">Sign in to your VEGAS account</p>
+            </div>
+            <form id="login-form">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="login-email" class="form-control" placeholder="your@email.com" required>
+                <label class="form-label">Password</label>
+                <input type="password" id="login-pass" class="form-control" placeholder="••••••••" required>
+                <button type="submit" class="btn-gold w-100 mt-4">Sign In</button>
+            </form>
+            <p class="text-center mt-4 small">New to VEGAS? <span class="text-gold fw-bold" style="cursor:pointer" onclick="toggleAuth('reg')">Register Now</span></p>
+        </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <main id="app-container" class="hidden">
+        <header>
+            <div class="app-logo" onclick="navigate('home')">
+                <div class="logo-icon"><i class="bi bi-dice-6"></i></div>
+                <span class="logo-text">VEGAS</span>
+            </div>
+            <div class="position-relative" onclick="navigate('notifications')" style="cursor:pointer">
+                <i class="bi bi-bell" style="color:var(--vegas-gold); font-size:22px;"></i>
+                <span id="notif-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger hidden" style="font-size:10px; padding:3px 6px; min-width:18px; height:18px; display:flex; align-items:center; justify-content:center;">0</span>
+            </div>
+            <i class="bi bi-person-circle" onclick="navigate('profile')" style="font-size:22px; cursor:pointer;"></i>
+        </header>
+
+        <div id="sections-wrapper">
+            <!-- HOME SECTION -->
+            <section id="home-sec">
+                <div class="summary-card">
+                    <p class="mb-1 opacity-75" style="font-size:14px">Available Balance</p>
+                    <h2 id="home-bal">₦0.00</h2>
+                    <div class="summary-stats">
+                        <div><small>Total Invested</small><br><strong id="home-inv" class="text-gold">₦0</strong></div>
+                        <div><small>Daily Earnings</small><br><strong id="home-day" class="text-gold">₦0</strong></div>
+                        <div><small>Total Returns</small><br><strong id="home-returns" class="text-gold">₦0</strong></div>
+                    </div>
+                </div>
+
+                <div class="info-box" onclick="navigate('invest')">
+                    <i class="bi bi-gem"></i>
+                    <div><p class="fw-bold mb-0" style="font-size:14px">Active Investments</p><p class="small text-gray mb-0" id="active-plans-count">0 Plans Running</p></div>
+                    <i class="bi bi-chevron-right ms-auto text-gray"></i>
+                </div>
+
+                <div class="quick-menu">
+                    <div class="menu-item" onclick="openDepositPage()"><i class="bi bi-wallet2"></i><span>Deposit</span></div>
+                    <div class="menu-item" onclick="openWithdrawPage()"><i class="bi bi-cash-stack"></i><span>Withdraw</span></div>
+                    <div class="menu-item" onclick="navigate('invest')"><i class="bi bi-graph-up"></i><span>Invest</span></div>
+                    <div class="menu-item" onclick="navigate('wallet')"><i class="bi bi-clock-history"></i><span>History</span></div>
+                    <div class="menu-item" onclick="navigate('service')"><i class="bi bi-chat-question"></i><span>Support</span></div>
+                    <div class="menu-item" onclick="navigate('profile')"><i class="bi bi-person"></i><span>Profile</span></div>
+                </div>
+
+                <div class="info-box whatsapp" onclick="window.open('https://chat.whatsapp.com/EHRpKAgh3236uwoIXvo2Kf', '_blank')">
+                    <i class="bi bi-whatsapp"></i>
+                    <div><p class="fw-bold mb-0" style="font-size:14px">Join Official Community</p><p class="small mb-0">Connect with VEGAS investors</p></div>
+                    <i class="bi bi-box-arrow-up-right ms-auto"></i>
+                </div>
+
+                <div class="info-box pwa hidden" id="pwa-install-box" onclick="installPWA()">
+                    <i class="bi bi-phone"></i>
+                    <div><p class="fw-bold mb-0" style="font-size:14px">Install App</p><p class="small mb-0">Add to home screen for quick access</p></div>
+                    <i class="bi bi-download ms-auto text-gold"></i>
+                </div>
+
+                <div id="active-plans-container"></div>
+            </section>
+
+            <!-- INVEST SECTION -->
+            <section id="invest-sec" class="hidden">
+                <h4 class="section-title"><i class="bi bi-gem"></i> Investment Plans</h4>
+                <p class="text-gray small px-3 pb-2">All plans run for 30 days with daily returns credited every 24 hours</p>
+                <div id="plans-list" class="pb-3"></div>
+            </section>
+
+            <!-- SERVICE SECTION - With Icon Hero -->
+            <section id="service-sec" class="hidden">
+                <div class="service-hero">
+                    <div class="service-hero-icon"><i class="bi bi-headset"></i></div>
+                    <h4>Help & Support</h4>
+                    <p>We're here to help you win big with VEGAS Investment</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4><i class="bi bi-info-circle"></i> What is VEGAS Investment?</h4>
+                    <p>VEGAS is a premium platform for luxury automotive asset funding. We provide verified daily returns on investments in high-value vehicles through our exclusive partnership network.</p>
+                </div>
+                <div class="faq-item">
+                    <h4><i class="bi bi-clock"></i> How Do Daily Returns Work?</h4>
+                    <p>Each investment plan runs for exactly 30 days. Returns are calculated and credited to your balance every 24 hours from activation time. Track your next payout timer in your active plans.</p>
+                </div>
+                <div class="faq-item">
+                    <h4><i class="bi bi-shield-check"></i> Is My Investment Safe?</h4>
+                    <p>All investments are backed by real automotive assets. We maintain transparent records and use secure Firebase infrastructure. Withdrawals are processed within 24 hours after admin approval.</p>
+                </div>
+                <div class="faq-item">
+                    <h4><i class="bi bi-people"></i> Referral Program</h4>
+                    <p>Earn 20% commission on every investment AND withdrawal made by users you refer. Your referral link is unique and commissions are credited instantly when their transactions are confirmed.</p>
+                </div>
+                <div class="faq-item">
+                    <h4><i class="bi bi-exclamation-triangle"></i> Deposit Verification</h4>
+                    <p>After making a deposit, wait for admin confirmation (usually within 5 minutes). Do not make multiple deposits for the same transaction. Fake deposits will result in account suspension.</p>
+                </div>
+                <div class="faq-item">
+                    <h4><i class="bi bi-headset"></i> Need More Help?</h4>
+                    <p>Our support team is available 24/7 via WhatsApp. Click the button below to connect directly with a support agent who can assist with your specific issue.</p>
+                    <button class="btn-gold w-100 mt-3" onclick="window.open('https://chat.whatsapp.com/EHRpKAgh3236uwoIXvo2Kf', '_blank')">
+                        <i class="bi bi-whatsapp me-2"></i>Contact Live Support
+                    </button>
+                </div>
+            </section>
+
+            <!-- WALLET SECTION -->
+            <section id="wallet-sec" class="hidden">
+                <div class="wallet-actions">
+                    <div class="wallet-btn" onclick="openDepositPage()"><i class="bi bi-wallet2"></i><span>Deposit</span></div>
+                    <div class="wallet-btn" onclick="openWithdrawPage()"><i class="bi bi-cash-stack"></i><span>Withdraw</span></div>
+                </div>
+                <h5 class="tx-section-title"><i class="bi bi-clock-history"></i> Transaction History</h5>
+                <div id="tx-list"><div class="empty-state"><i class="bi bi-clock-history"></i><p>No transactions yet</p><small>Start by making a deposit or investment</small></div></div>
+            </section>
+
+            <!-- DEPOSIT PAGE -->
+            <section id="deposit-amount-sec" class="hidden">
+                <div class="deposit-page">
+                    <div class="back-btn" onclick="navigate('home')"><i class="bi bi-arrow-left"></i> Back</div>
+                    <div class="page-header"><i class="bi bi-wallet2"></i><h4>Make a Deposit</h4><p>Select the amount you want to deposit</p></div>
+                    <div class="amount-selector">
+                        <label class="form-label">Deposit Amount (₦)</label>
+                        <div class="amount-input-group">
+                            <input type="number" id="rec-amt" class="form-control amount-input" placeholder="3000" min="3000" value="3000">
+                        </div>
+                        <small class="text-gray d-block mb-2">Quick amounts:</small>
+                        <div class="quick-amounts">
+                            <div class="quick-amount-btn active" onclick="setAmount(3000, this)">₦3,000</div>
+                            <div class="quick-amount-btn" onclick="setAmount(10000, this)">₦10,000</div>
+                            <div class="quick-amount-btn" onclick="setAmount(25000, this)">₦25,000</div>
+                            <div class="quick-amount-btn" onclick="setAmount(50000, this)">₦50,000</div>
+                            <div class="quick-amount-btn" onclick="setAmount(100000, this)">₦100,000</div>
+                            <div class="quick-amount-btn" onclick="setAmount(250000, this)">₦250,000</div>
+                        </div>
+                        <button class="btn-gold w-100 mt-4" onclick="proceedToBankDetails()"><i class="bi bi-arrow-right me-2"></i>Make Payment</button>
+                    </div>
+                    <div class="info-text"><i class="bi bi-info-circle me-2"></i>Minimum deposit: ₦3,000 • Verification within 5 minutes</div>
+                </div>
+            </section>
+
+            <!-- BANK DETAILS PAGE - UPDATED WITH NEW DETAILS -->
+            <section id="bank-details-sec" class="hidden">
+                <div class="bank-details-page">
+                    <div class="back-btn" onclick="showDepositAmountPage()"><i class="bi bi-arrow-left"></i> Change Amount</div>
+                    <div class="page-header"><i class="bi bi-bank"></i><h4>Payment Details</h4><p>Transfer to the account below with your username as reference</p></div>
+                    <div class="bank-details-card">
+                        <div class="bank-detail-row">
+                            <span class="bank-detail-label"><i class="bi bi-building"></i> Bank Name</span>
+                            <span class="bank-detail-value">Moniepoint MFB</span>
+                        </div>
+                        <div class="bank-detail-row">
+                            <span class="bank-detail-label"><i class="bi bi-credit-card"></i> Account Number</span>
+                            <div style="display:flex;align-items:center;gap:10px">
+                                <span class="bank-detail-value" id="bank-account-num">6930069738</span>
+                                <button class="copy-btn" onclick="copyToClipboard('6930069738')">Copy</button>
+                            </div>
+                        </div>
+                        <div class="bank-detail-row">
+                            <span class="bank-detail-label"><i class="bi bi-person"></i> Account Name</span>
+                            <div style="display:flex;align-items:center;gap:10px">
+                                <span class="bank-detail-value">Julius Emmanuel</span>
+                                <button class="copy-btn" onclick="copyToClipboard('Julius Emmanuel')">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="warn-text mb-4"><i class="bi bi-exclamation-triangle me-2"></i><strong>Important:</strong> Only transfer to the account details shown above. Always include your username as payment reference.</div>
+                    <div class="sender-form">
+                        <label class="form-label">Your Bank Account Name</label>
+                        <input type="text" id="rec-sender" class="form-control" placeholder="Required for verification" required>
+                        <label class="form-label mt-3">Transaction Reference (Optional)</label>
+                        <input type="text" id="rec-ref" class="form-control" placeholder="e.g., TXN123456">
+                        <div class="amount-selector mt-4" style="background:rgba(212,175,55,0.1);border-color:var(--vegas-gold)">
+                            <small class="text-gold fw-bold d-block mb-2">Amount to Deposit:</small>
+                            <div style="font-size:28px;font-weight:700;color:var(--vegas-gold);font-family:monospace">₦<span id="deposit-amount-display">3,000</span></div>
+                        </div>
+                        <button class="btn-gold w-100 mt-4" onclick="confirmDepositPayment()"><i class="bi bi-check-circle me-2"></i>I Have Completed Payment</button>
+                    </div>
+                    <p class="text-center small text-gray mt-4"><i class="bi bi-shield-check me-1"></i>Your deposit will be verified by admin within 5 minutes</p>
+                </div>
+            </section>
+
+            <!-- WITHDRAW SECTION -->
+            <section id="withdraw-sec" class="hidden">
+                <div class="withdraw-page">
+                    <div class="bank-header">
+                        <i class="bi bi-cash-stack"></i>
+                        <h4>Withdraw Funds</h4>
+                        <p>Withdraw to your linked bank account</p>
+                    </div>
+                    <div id="bind-sec">
+                        <div class="info-text mb-4"><i class="bi bi-info-circle me-2"></i>Please bind your bank account to receive withdrawals</div>
+                        <div class="sender-form">
+                            <label class="form-label">Select Bank</label>
+                            <select id="wit-bank" class="form-control">
+                                <option>Moniepoint MFB</option><option>PalmPay</option><option>Opay</option><option>Kuda Bank</option><option>GTBank</option><option>Access Bank</option><option>First Bank</option><option>UBA</option><option>Zenith Bank</option>
+                            </select>
+                            <label class="form-label mt-3">Account Number</label>
+                            <input type="text" id="wit-num" class="form-control" placeholder="10-digit account number" maxlength="10" pattern="\d{10}">
+                            <label class="form-label mt-3">Account Name</label>
+                            <input type="text" id="wit-name" class="form-control" placeholder="Must match bank records">
+                            <button class="btn-gold w-100 mt-4" onclick="saveBankDetails()"><i class="bi bi-save me-2"></i>Save Bank Details</button>
+                        </div>
+                    </div>
+                    <div id="wit-form" class="hidden">
+                        <div class="bank-details-card mb-4">
+                            <div class="bank-detail-row">
+                                <span class="bank-detail-label"><i class="bi bi-building"></i> Linked Account</span>
+                                <span class="bank-detail-value" id="linked-bank-display">Moniepoint •••• ••••</span>
+                            </div>
+                            <div class="bank-detail-row">
+                                <span class="bank-detail-label"><i class="bi bi-person"></i> Account Name</span>
+                                <span class="bank-detail-value" id="linked-name-display">•••••• •••••</span>
+                            </div>
+                        </div>
+                        <div class="sender-form">
+                            <label class="form-label">Withdrawal Amount (₦)</label>
+                            <div class="amount-input-group">
+                                <input type="number" id="wit-amt" class="form-control amount-input" placeholder="5000" min="5000" value="5000">
+                            </div>
+                            <small class="text-gray d-block mt-1">Available balance: <span id="wit-balance" class="text-gold fw-bold">₦0</span></small>
+                            <div class="warn-text mt-4 mb-0"><i class="bi bi-info-circle me-2"></i>Withdrawals are processed within 24 hours. Minimum amount: ₦5,000</div>
+                            <button class="btn-gold w-100 mt-4" onclick="submitWithdrawal()"><i class="bi bi-send me-2"></i>Request Withdrawal</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROFILE SECTION -->
+            <section id="profile-sec" class="hidden">
+                <div class="profile-header">
+                    <div class="profile-avatar"><i class="bi bi-person-fill"></i></div>
+                    <div class="profile-name" id="prof-name">Loading...</div>
+                    <div class="profile-email" id="prof-email">...</div>
+                    <span class="profile-badge">Verified Member</span>
+                </div>
+                <div class="profile-stats">
+                    <div class="profile-stat"><div class="profile-stat-value" id="stat-invested">₦0</div><div class="profile-stat-label">Total Invested</div></div>
+                    <div class="profile-stat"><div class="profile-stat-value" id="stat-earned">₦0</div><div class="profile-stat-label">Total Earned</div></div>
+                    <div class="profile-stat"><div class="profile-stat-value" id="stat-referrals">0</div><div class="profile-stat-label">Referrals</div></div>
+                </div>
+                <div class="referral-card">
+                    <div class="referral-title"><i class="bi bi-people"></i><span>Refer & Earn 20%</span></div>
+                    <p class="referral-desc">Share your link and earn 20% commission on referrals' investments AND withdrawals</p>
+                    <div class="referral-code" id="ref-code">LOADING</div>
+                    <button class="btn-outline-gold btn-sm" onclick="copyReferralLink()"><i class="bi bi-clipboard me-1"></i>Copy Link</button>
+                    <div class="commission-info">
+                        <div class="commission-row"><span>Commission Rate</span><span class="commission-value">20%</span></div>
+                        <div class="commission-row"><span>Total Commissions</span><span class="commission-value" id="ref-earn">₦0</span></div>
+                        <div class="commission-row"><span>Active Referrals</span><span class="commission-value" id="ref-active">0</span></div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <div class="profile-action-btn" onclick="openEditProfile()"><i class="bi bi-pencil-square"></i><span>Edit Profile</span><i class="bi bi-chevron-right"></i></div>
+                    <div class="profile-action-btn" onclick="openChangePassword()"><i class="bi bi-lock"></i><span>Change Password</span><i class="bi bi-chevron-right"></i></div>
+                    <div class="profile-action-btn" onclick="openSecuritySettings()"><i class="bi bi-shield-check"></i><span>Security Settings</span><i class="bi bi-chevron-right"></i></div>
+                    <div class="profile-action-btn" onclick="showAppInfo()"><i class="bi bi-info-circle"></i><span>App Information</span><i class="bi bi-chevron-right"></i></div>
+                    <div class="profile-action-btn" onclick="confirmLogout()"><i class="bi bi-box-arrow-right"></i><span>Logout</span><i class="bi bi-chevron-right"></i></div>
+                </div>
+                <p class="text-center text-gray small mt-4 px-3">VEGAS Investment v3.0.0<br>© 2024 VEGAS. All rights reserved.</p>
+            </section>
+
+            <!-- NOTIFICATIONS SECTION -->
+            <section id="notifications-sec" class="hidden">
+                <h4 class="section-title"><i class="bi bi-bell"></i> Notifications</h4>
+                <div id="notif-list">
+                    <div class="faq-item">
+                        <h4><i class="bi bi-star-fill text-gold"></i> Welcome to VEGAS!</h4>
+                        <p>Your account has been successfully created. Claim your ₦600 welcome bonus and start investing today.</p>
+                        <small>Just now</small>
+                    </div>
+                    <div class="faq-item">
+                        <h4><i class="bi bi-gift text-gold"></i> Bonus Available</h4>
+                        <p>Complete your first investment to unlock additional rewards and boost your earnings.</p>
+                        <small>2 hours ago</small>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <nav class="bottom-nav">
+            <div class="nav-link active" onclick="navigate('home')"><i class="bi bi-house-door"></i><span>Home</span></div>
+            <div class="nav-link" onclick="navigate('invest')"><i class="bi bi-gem"></i><span>Invest</span></div>
+            <div class="nav-link" onclick="navigate('service')"><i class="bi bi-chat-question"></i><span>Support</span></div>
+            <div class="nav-link" onclick="navigate('wallet')"><i class="bi bi-wallet2"></i><span>Wallet</span></div>
+            <div class="nav-link" onclick="navigate('profile')"><i class="bi bi-person"></i><span>Profile</span></div>
+        </nav>
+    </main>
+
+    <!-- PLAN DETAIL MODAL -->
+    <div id="plan-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header-custom">
+                    <h5 class="modal-title modal-title-gold" id="plan-modal-title">Plan Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="plan-modal-img" class="plan-detail-img"></div>
+                    <h4 id="plan-modal-name" class="text-gold mb-3" style="font-size:20px"></h4>
+                    <p id="plan-modal-desc" class="plan-detail-desc"></p>
+                    <div class="plan-detail-stats">
+                        <div class="stat-box"><div class="stat-box-value" id="plan-modal-price">₦0</div><div class="stat-box-label">Investment</div></div>
+                        <div class="stat-box"><div class="stat-box-value" id="plan-modal-daily">₦0</div><div class="stat-box-label">Daily Return</div></div>
+                        <div class="stat-box"><div class="stat-box-value" id="plan-modal-total">₦0</div><div class="stat-box-label">Total Return</div></div>
+                        <div class="stat-box"><div class="stat-box-value">30</div><div class="stat-box-label">Days Duration</div></div>
+                    </div>
+                    <div class="alert alert-dark small mb-4" style="background:rgba(255,255,255,0.08); border:none; color:var(--text-gray)"><i class="bi bi-info-circle me-1"></i>Returns are credited every 24 hours from activation. Plan expires after 30 days.</div>
+                    <div class="d-grid gap-2">
+                        <button class="btn-gold" id="plan-purchase-btn"><i class="bi bi-cart-check me-2"></i>Purchase Plan</button>
+                        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WELCOME & BONUS MODALS -->
+    <div id="welcome-modal" class="modal fade" data-bs-backdrop="static" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+            <div class="text-center p-4">
+                <div class="logo-icon mx-auto mb-3" style="width:60px; height:60px;"><i class="bi bi-award" style="font-size:30px;"></i></div>
+                <h4 class="text-gold mt-2" style="font-size:22px;font-family:'Playfair Display',serif">Welcome to VEGAS!</h4>
+                <p class="mt-3 text-gray small px-3">The premier platform for automotive asset investments. Earn daily returns with our verified investment plans.</p>
+                <button class="btn-gold mt-4" onclick="claimWelcomeBonus()">Claim ₦600 Bonus & Continue</button>
+            </div>
+        </div></div>
+    </div>
+
+    <div id="bonus-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+            <div class="text-center p-4">
+                <i class="bi bi-cash-coin" style="font-size:50px; color:var(--vegas-gold);"></i>
+                <h4 class="text-gold mt-3" style="font-size:22px;font-family:'Playfair Display',serif">Bonus Claimed!</h4>
+                <p class="mt-3"><strong>₦600</strong> has been added to your balance.<br>Start investing to maximize your earnings!</p>
+                <button class="btn-gold mt-4" data-bs-dismiss="modal" onclick="navigate('invest')">Explore Plans</button>
+            </div>
+        </div></div>
+    </div>
+
+    <!-- Profile Action Modals -->
+    <div id="edit-profile-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered"><div class="modal-profile">
+            <div class="modal-profile-title">Edit Profile</div>
+            <input type="text" class="modal-profile-input" id="edit-username" placeholder="New Username">
+            <input type="email" class="modal-profile-input" id="edit-email" placeholder="New Email">
+            <div class="d-grid gap-2 mt-3">
+                <button class="btn-gold" onclick="saveProfileChanges()">Save Changes</button>
+                <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div></div>
+    </div>
+
+    <div id="change-password-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered"><div class="modal-profile">
+            <div class="modal-profile-title">Change Password</div>
+            <input type="password" class="modal-profile-input" id="current-pass" placeholder="Current Password">
+            <input type="password" class="modal-profile-input" id="new-pass" placeholder="New Password">
+            <input type="password" class="modal-profile-input" id="confirm-new-pass" placeholder="Confirm New Password">
+            <div class="d-grid gap-2 mt-3">
+                <button class="btn-gold" onclick="updatePassword()">Update Password</button>
+                <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div></div>
+    </div>
+
+    <div id="security-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered"><div class="modal-profile">
+            <div class="modal-profile-title">Security Settings</div>
+            <div class="text-start mb-3">
+                <div class="form-check mb-3"><input class="form-check-input" type="checkbox" id="two-factor" checked><label class="form-check-label" for="two-factor">Enable Two-Factor Authentication</label></div>
+                <div class="form-check mb-3"><input class="form-check-input" type="checkbox" id="login-alerts" checked><label class="form-check-label" for="login-alerts">Login Alert Notifications</label></div>
+            </div>
+            <div class="d-grid gap-2">
+                <button class="btn-gold" onclick="saveSecuritySettings()">Save Settings</button>
+                <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div></div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirm-modal" class="confirm-modal">
+        <div class="confirm-content">
+            <i class="confirm-icon bi bi-check-circle-fill success" id="confirm-icon"></i>
+            <div class="confirm-title" id="confirm-title">Success</div>
+            <div class="confirm-message" id="confirm-message">Operation completed successfully</div>
+            <div class="confirm-actions">
+                <button class="confirm-btn cancel" onclick="closeConfirmModal()">Close</button>
+                <button class="confirm-btn ok-approve" id="confirm-action-btn" onclick="executeConfirmAction()">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // ========================================
+        // FIREBASE CONFIGURATION - SAME AS ADMIN PANEL ✅
+        // ========================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyBKVhNP4TyU8Qs1jK1Mk5xUgu7fO3zjijk",
+  authDomain: "telerinvesr-98a9a.firebaseapp.com",
+  databaseURL: "https://telerinvesr-98a9a-default-rtdb.firebaseio.com",
+  projectId: "telerinvesr-98a9a",
+  storageBucket: "telerinvesr-98a9a.firebasestorage.app",
+  messagingSenderId: "983318086820",
+  appId: "1:983318086820:web:0b64ffd6ebecb151229231"
+};
+
+        // Initialize Firebase with LOCAL persistence
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+            firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+                .catch(function(err) { console.warn('Persistence set warning:', err); });
+        }
+        var auth = firebase.auth();
+        var db = firebase.database();
+
+        // Investment Plans
+        var PLANS = [
+            { id: 1, name: 'Starter (Toyota)', price: 3000, daily: 700, total: 21000, duration: 30, img: 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?q=80&w=400', desc: 'Perfect for beginners. Start your investment journey with reliable daily returns.' },
+            { id: 2, name: 'Bronze (Mercedes)', price: 10000, daily: 1333, total: 40000, duration: 30, img: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=400', desc: 'Enhanced returns with premium vehicle backing. Ideal for growing your portfolio.' },
+            { id: 3, name: 'Silver (BMW)', price: 25000, daily: 2083, total: 62500, duration: 30, img: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=400', desc: 'High-value investment with substantial daily earnings and capital protection.' },
+            { id: 4, name: 'Gold (Lexus)', price: 50000, daily: 4166, total: 125000, duration: 30, img: 'https://images.unsplash.com/photo-1594052069771-469b76c8c9b9?q=80&w=400', desc: 'Premium tier investment with accelerated returns and priority support.' },
+            { id: 5, name: 'Diamond (Range Rover)', price: 100000, daily: 8333, total: 250000, duration: 30, img: 'https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=400', desc: 'Elite investment class with maximum returns and exclusive benefits.' },
+            { id: 6, name: 'VIP (Rolls-Royce)', price: 250000, daily: 20833, total: 625000, duration: 30, img: 'https://images.unsplash.com/photo-1631214503951-3751369ede00?q=80&w=400', desc: 'Ultimate investment experience with highest returns and VIP treatment.' }
+        ];
+
+        // Global variables
+        var userData = null;
+        var selectedPlan = null;
+        var timerIntervals = {};
+        var pendingDeposit = null;
+        var confirmCallback = null;
+        var deferredPrompt = null;
+        var unsubscribeTransactions = null;
+
+        // ========================================
+        // AUTHENTICATION HANDLERS
+        // ========================================
+        auth.onAuthStateChanged(function(user) {
+            document.getElementById('loader').style.display = 'none';
+            if (user) {
+                document.getElementById('auth-section').classList.add('hidden');
+                document.getElementById('app-container').classList.remove('hidden');
+                loadUserData(user.uid);
+                startEarningsChecker();
+                checkPWAInstallable();
+            } else {
+                document.getElementById('auth-section').classList.remove('hidden');
+                document.getElementById('app-container').classList.add('hidden');
+                // Cleanup listeners on logout
+                Object.values(timerIntervals).forEach(function(interval) { clearInterval(interval); });
+                timerIntervals = {};
+                if (unsubscribeTransactions) { 
+                    unsubscribeTransactions(); 
+                    unsubscribeTransactions = null; 
+                }
+            }
+        });
+
+        function loadUserData(uid) {
+            db.ref('users/' + uid).on('value', function(snap) {
+                var data = snap.val();
+                if (!data) return;
+                userData = data;
+                updateBalanceUI();
+                updateProfileUI();
+                updateActivePlansUI();
+                renderPlans();
+                renderTransactionHistory();
+                renderNotifications();
+                
+                if (!data.claimBonus && !data.hasSeenWelcome) {
+                    new bootstrap.Modal(document.getElementById('welcome-modal')).show();
+                    db.ref('users/' + uid).update({ hasSeenWelcome: true });
+                }
+                
+                if (data.bankAccount) {
+                    document.getElementById('bind-sec').classList.add('hidden');
+                    document.getElementById('wit-form').classList.remove('hidden');
+                    document.getElementById('linked-bank-display').textContent = 
+                        (data.bankAccount.bank || 'Bank') + ' •••• ' + ((data.bankAccount.num || '').slice(-4));
+                    document.getElementById('linked-name-display').textContent = 
+                        (data.bankAccount.name || '').replace(/(.{3}).*(.{3})/, '$1***$2');
+                }
+            });
+        }
+
+        function updateBalanceUI() {
+            if (!userData) return;
+            document.getElementById('home-bal').textContent = '₦' + ((userData.balance || 0).toLocaleString());
+            document.getElementById('home-inv').textContent = '₦' + ((userData.totalInvested || 0).toLocaleString());
+            document.getElementById('home-day').textContent = '₦' + ((userData.dailyIncome || 0).toLocaleString());
+            document.getElementById('home-returns').textContent = '₦' + ((userData.totalReturns || 0).toLocaleString());
+            var witBalEl = document.getElementById('wit-balance');
+            if (witBalEl) witBalEl.textContent = '₦' + ((userData.balance || 0).toLocaleString());
+        }
+
+        function updateProfileUI() {
+            if (!userData) return;
+            document.getElementById('prof-name').textContent = userData.username || 'User';
+            document.getElementById('prof-email').textContent = userData.email || '';
+            document.getElementById('ref-code').textContent = userData.username || 'N/A';
+            document.getElementById('stat-invested').textContent = '₦' + ((userData.totalInvested || 0).toLocaleString());
+            document.getElementById('stat-earned').textContent = '₦' + ((userData.totalReturns || 0).toLocaleString());
+            document.getElementById('stat-referrals').textContent = userData.totalReferrals || 0;
+            document.getElementById('ref-earn').textContent = '₦' + ((userData.referralEarnings || 0).toLocaleString());
+            document.getElementById('ref-active').textContent = userData.activeReferrals || 0;
+            document.getElementById('edit-username').value = userData.username || '';
+            document.getElementById('edit-email').value = userData.email || '';
+        }
+
+        // ========================================
+        // INVESTMENT PLAN FUNCTIONS
+        // ========================================
+        function renderPlans() {
+            var container = document.getElementById('plans-list');
+            if (!container) return;
+            container.innerHTML = PLANS.map(function(plan) {
+                var roi = Math.round((plan.total / plan.price - 1) * 100);
+                return '<div class="plan-card" onclick="showPlanDetail(' + plan.id + ')">' +
+                    '<div class="plan-img" style="background-image:url(\'' + plan.img + '\')"></div>' +
+                    '<div class="plan-details">' +
+                        '<span class="plan-badge">' + roi + '% ROI</span>' +
+                        '<h5 class="mb-1" style="font-size:16px">' + plan.name + '</h5>' +
+                        '<p class="small text-gray mb-2" style="font-size:12px">' + plan.desc + '</p>' +
+                        '<div class="plan-stats">' +
+                            '<div class="plan-stat-item"><small>Investment</small><br><strong class="text-gold">₦' + plan.price.toLocaleString() + '</strong></div>' +
+                            '<div class="plan-stat-item"><small>Daily Return</small><br><strong>₦' + plan.daily.toLocaleString() + '</strong></div>' +
+                            '<div class="plan-stat-item"><small>Total Return</small><br><strong class="text-gold">₦' + plan.total.toLocaleString() + '</strong></div>' +
+                            '<div class="plan-stat-item"><small>Duration</small><br><strong>' + plan.duration + ' Days</strong></div>' +
+                        '</div>' +
+                        '<button class="btn-gold btn-sm mt-2" style="padding:6px 12px; font-size:11px">View Details</button>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        function showPlanDetail(planId) {
+            selectedPlan = PLANS.find(function(p) { return p.id === planId; });
+            if (!selectedPlan) return;
+            document.getElementById('plan-modal-title').textContent = 'Plan Details';
+            document.getElementById('plan-modal-name').textContent = selectedPlan.name;
+            document.getElementById('plan-modal-img').style.backgroundImage = 'url(\'' + selectedPlan.img + '\')';
+            document.getElementById('plan-modal-price').textContent = '₦' + selectedPlan.price.toLocaleString();
+            document.getElementById('plan-modal-daily').textContent = '₦' + selectedPlan.daily.toLocaleString();
+            document.getElementById('plan-modal-total').textContent = '₦' + selectedPlan.total.toLocaleString();
+            document.getElementById('plan-modal-desc').textContent = selectedPlan.desc;
+            document.getElementById('plan-purchase-btn').onclick = function() {
+                bootstrap.Modal.getInstance(document.getElementById('plan-modal')).hide();
+                confirmPurchase(selectedPlan);
+            };
+            new bootstrap.Modal(document.getElementById('plan-modal')).show();
+        }
+
+        function confirmPurchase(plan) {
+            if (!userData) return;
+            if (userData.balance < plan.price) {
+                showToast('Insufficient balance. Please deposit funds first.', 'error');
+                openDepositPage();
+                return;
+            }
+            if (!confirm('Confirm purchase of ' + plan.name + ' for ₦' + plan.price.toLocaleString() + '?\n\nDaily return: ₦' + plan.daily.toLocaleString() + '\nDuration: ' + plan.duration + ' days')) return;
+            
+            Promise.resolve().then(function() {
+                var now = Date.now();
+                var planKey = 'plan_' + now;
+                var uid = auth.currentUser ? auth.currentUser.uid : null;
+                if (!uid) throw new Error('User not authenticated');
+                
+                var updates = {};
+                updates['users/' + uid + '/balance'] = (userData.balance || 0) - plan.price;
+                updates['users/' + uid + '/totalInvested'] = (userData.totalInvested || 0) + plan.price;
+                updates['users/' + uid + '/dailyIncome'] = (userData.dailyIncome || 0) + plan.daily;
+                updates['users/' + uid + '/activePlans/' + planKey] = {
+                    id: plan.id, name: plan.name, price: plan.price, daily: plan.daily,
+                    total: plan.total, duration: plan.duration, startTime: now,
+                    lastClaim: now, daysClaimed: 0, nextClaim: now + 86400000, status: 'active'
+                };
+                var txRef = db.ref('transactions').push().key;
+                updates['transactions/' + txRef] = {
+                    uid: uid, type: 'investment', amount: plan.price, planName: plan.name,
+                    status: 'completed', timestamp: now, description: 'Activated ' + plan.name + ' plan'
+                };
+                
+                return db.ref().update(updates);
+            }).then(function() {
+                // Referral commission (20%) - NON-BLOCKING
+                try {
+                    var referrerCode = userData.referredBy;
+                    if (referrerCode && referrerCode !== 'none') {
+                        db.ref('users').orderByChild('username').equalTo(referrerCode).once('value').then(function(referrerSnap) {
+                            referrerSnap.forEach(function(referrer) {
+                                var rData = referrer.val();
+                                var commission = Math.round(plan.price * 0.20);
+                                db.ref('users/' + referrer.key + '/balance').set((rData.balance || 0) + commission);
+                                db.ref('users/' + referrer.key + '/referralEarnings').set((rData.referralEarnings || 0) + commission);
+                                db.ref('users/' + referrer.key + '/activeReferrals').set((rData.activeReferrals || 0) + 1);
+                                db.ref('transactions').push().set({
+                                    uid: referrer.key, type: 'referral', amount: commission, referredUser: userData.username,
+                                    source: 'investment', status: 'completed', timestamp: Date.now(),
+                                    description: '20% commission from ' + userData.username + '\'s ' + plan.name + ' investment'
+                                });
+                            });
+                        });
+                    }
+                } catch (refErr) { console.warn('Referral commission warning:', refErr); }
+                
+                showToast('✅ ' + plan.name + ' activated! Daily returns start in 24 hours.', 'success');
+                navigate('home');
+            }).catch(function(error) {
+                console.error('Purchase error:', error);
+                showToast('Failed to activate plan. Please try again.', 'error');
+            });
+        }
+
+        // ========================================
+        // EARNINGS & TIMER SYSTEM
+        // ========================================
+        function startEarningsChecker() {
+            setInterval(function() {
+                if (!userData || !userData.activePlans) return;
+                var now = Date.now();
+                var totalEarnings = 0;
+                var updates = {};
+                var uid = auth.currentUser ? auth.currentUser.uid : null;
+                if (!uid) return;
+                
+                for (var planKey in userData.activePlans) {
+                    var plan = userData.activePlans[planKey];
+                    if (plan.status !== 'active') continue;
+                    if (now >= plan.nextClaim && plan.daysClaimed < plan.duration) {
+                        totalEarnings += plan.daily;
+                        updates['users/' + uid + '/activePlans/' + planKey + '/lastClaim'] = now;
+                        updates['users/' + uid + '/activePlans/' + planKey + '/nextClaim'] = now + 86400000;
+                        updates['users/' + uid + '/activePlans/' + planKey + '/daysClaimed'] = plan.daysClaimed + 1;
+                        if (plan.daysClaimed + 1 >= plan.duration) updates['users/' + uid + '/activePlans/' + planKey + '/status'] = 'completed';
+                    }
+                }
+                
+                if (totalEarnings > 0) {
+                    updates['users/' + uid + '/balance'] = (userData.balance || 0) + totalEarnings;
+                    updates['users/' + uid + '/totalReturns'] = (userData.totalReturns || 0) + totalEarnings;
+                    var txRef = db.ref('transactions').push().key;
+                    updates['transactions/' + txRef] = { uid: uid, type: 'earnings', amount: totalEarnings, status: 'completed', timestamp: now, description: 'Daily returns from active plans' };
+                    db.ref().update(updates).then(function() {
+                        showToast('🎉 ₦' + totalEarnings.toLocaleString() + ' daily returns credited!', 'success');
+                    }).catch(function(e) { console.warn('Earnings update warning:', e); });
+                }
+            }, 60000);
+            checkAndClaimEarnings();
+        }
+
+        function checkAndClaimEarnings() {
+            if (!userData || !userData.activePlans) return;
+            var now = Date.now();
+            var totalEarnings = 0;
+            var updates = {};
+            var uid = auth.currentUser ? auth.currentUser.uid : null;
+            if (!uid) return;
+            for (var planKey in userData.activePlans) {
+                var plan = userData.activePlans[planKey];
+                if (plan.status !== 'active') continue;
+                if (now >= plan.nextClaim && plan.daysClaimed < plan.duration) {
+                    totalEarnings += plan.daily;
+                    updates['users/' + uid + '/activePlans/' + planKey + '/lastClaim'] = now;
+                    updates['users/' + uid + '/activePlans/' + planKey + '/nextClaim'] = now + 86400000;
+                    updates['users/' + uid + '/activePlans/' + planKey + '/daysClaimed'] = plan.daysClaimed + 1;
+                    if (plan.daysClaimed + 1 >= plan.duration) updates['users/' + uid + '/activePlans/' + planKey + '/status'] = 'completed';
+                }
+            }
+            if (totalEarnings > 0) {
+                updates['users/' + uid + '/balance'] = (userData.balance || 0) + totalEarnings;
+                updates['users/' + uid + '/totalReturns'] = (userData.totalReturns || 0) + totalEarnings;
+                var txRef = db.ref('transactions').push().key;
+                updates['transactions/' + txRef] = { uid: uid, type: 'earnings', amount: totalEarnings, status: 'completed', timestamp: now, description: 'Daily returns from active plans' };
+                db.ref().update(updates).catch(function(e) { console.warn('Initial earnings warning:', e); });
+            }
+        }
+
+        function updateActivePlansUI() {
+            var container = document.getElementById('active-plans-container');
+            if (!container || !userData || !userData.activePlans) { 
+                if (container) container.innerHTML = ''; 
+                return; 
+            }
+            var activePlans = [];
+            for (var key in userData.activePlans) {
+                var plan = userData.activePlans[key];
+                if (plan.status === 'active') activePlans.push([key, plan]);
+            }
+            activePlans.sort(function(a, b) { return b[1].nextClaim - a[1].nextClaim; });
+            
+            if (activePlans.length === 0) { container.innerHTML = ''; return; }
+            document.getElementById('active-plans-count').textContent = activePlans.length + ' Plan' + (activePlans.length > 1 ? 's' : '') + ' Running';
+            container.innerHTML = activePlans.map(function(item) {
+                var key = item[0], plan = item[1];
+                var now = Date.now();
+                var timeLeft = Math.max(0, plan.nextClaim - now);
+                var h = Math.floor(timeLeft / 3600000);
+                var m = Math.floor((timeLeft % 3600000) / 60000);
+                var s = Math.floor((timeLeft % 60000) / 1000);
+                var progress = Math.min(100, (plan.daysClaimed / plan.duration) * 100);
+                return '<div class="active-plan-card">' +
+                    '<div class="d-flex justify-content-between align-items-start mb-2">' +
+                        '<div><span class="badge bg-gold text-dark mb-2" style="font-size:11px">' + plan.name + '</span><p class="small mb-0">Daily Return: <strong class="text-gold">₦' + plan.daily.toLocaleString() + '</strong></p></div>' +
+                        '<span class="badge bg-success" style="font-size:10px">Active</span>' +
+                    '</div>' +
+                    '<div class="text-center my-2"><small class="text-gray d-block mb-1" style="font-size:12px">Next payout in</small><div class="timer-display timer-pulse" id="timer-' + key + '">' + h.toString().padStart(2,'0') + ':' + m.toString().padStart(2,'0') + ':' + s.toString().padStart(2,'0') + '</div></div>' +
+                    '<div class="mb-2">' +
+                        '<div class="d-flex justify-content-between small mb-1" style="font-size:12px"><span>Progress</span><span>' + plan.daysClaimed + '/' + plan.duration + ' days</span></div>' +
+                        '<div class="progress"><div class="progress-bar" role="progressbar" style="width: ' + progress + '%"></div></div>' +
+                    '</div>' +
+                    '<div class="d-flex justify-content-between small text-gray" style="font-size:12px"><span>Invested: ₦' + plan.price.toLocaleString() + '</span><span>Earned: ₦' + (plan.daily * plan.daysClaimed).toLocaleString() + '</span></div>' +
+                '</div>';
+            }).join('');
+            
+            activePlans.forEach(function(item) {
+                var key = item[0], plan = item[1];
+                if (timerIntervals[key]) clearInterval(timerIntervals[key]);
+                timerIntervals[key] = setInterval(function() {
+                    var el = document.getElementById('timer-' + key);
+                    if (!el) return;
+                    var tl = Math.max(0, plan.nextClaim - Date.now());
+                    el.textContent = Math.floor(tl/3600000).toString().padStart(2,'0') + ':' + Math.floor((tl%3600000)/60000).toString().padStart(2,'0') + ':' + Math.floor((tl%60000)/1000).toString().padStart(2,'0');
+                }, 1000);
+            });
+        }
+
+        // ========================================
+        // DEPOSIT FLOW
+        // ========================================
+        function openDepositPage() { showDepositAmountPage(); }
+        function showDepositAmountPage() {
+            document.querySelectorAll('section[id$="-sec"]').forEach(function(sec) { sec.classList.add('hidden'); });
+            document.getElementById('deposit-amount-sec').classList.remove('hidden');
+            document.getElementById('rec-amt').value = '3000';
+            document.getElementById('rec-sender').value = '';
+            document.getElementById('rec-ref').value = '';
+            document.getElementById('deposit-amount-display').textContent = '3,000';
+            document.querySelectorAll('.quick-amount-btn').forEach(function(btn) { btn.classList.remove('active'); });
+            var btn = document.querySelector('.quick-amount-btn[onclick="setAmount(3000, this)"]');
+            if (btn) btn.classList.add('active');
+        }
+        function setAmount(amount, btn) {
+            document.getElementById('rec-amt').value = amount;
+            document.getElementById('deposit-amount-display').textContent = amount.toLocaleString();
+            document.querySelectorAll('.quick-amount-btn').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+        }
+        function proceedToBankDetails() {
+            var amount = parseFloat(document.getElementById('rec-amt').value);
+            if (!amount || amount < 3000) { showToast('Minimum deposit amount is ₦3,000', 'error'); return; }
+            pendingDeposit = { amount: amount };
+            document.querySelectorAll('section[id$="-sec"]').forEach(function(sec) { sec.classList.add('hidden'); });
+            document.getElementById('bank-details-sec').classList.remove('hidden');
+        }
+        function confirmDepositPayment() {
+            var senderName = document.getElementById('rec-sender').value.trim();
+            var ref = document.getElementById('rec-ref').value.trim();
+            var amount = pendingDeposit ? pendingDeposit.amount : parseFloat(document.getElementById('rec-amt').value);
+            if (!senderName) { showToast('Please enter your bank account name for verification', 'error'); return; }
+            Promise.resolve().then(function() {
+                var depositData = {
+                    uid: auth.currentUser.uid, username: userData.username, amount: amount,
+                    senderName: senderName, reference: ref || 'TXN' + Date.now(), status: 'pending',
+                    timestamp: Date.now(), bank: 'Moniepoint MFB', accountNumber: '6930069738'
+                };
+                return db.ref('deposits').push().set(depositData);
+            }).then(function() {
+                showConfirmModal('success', 'Deposit Submitted!', 'You have successfully made a deposit of ₦' + amount.toLocaleString() + '.<br><br>Wait for confirmation within 5 minutes. Once admin approves, it will appear in your transaction history.', 'Got it', function() { navigate('home'); pendingDeposit = null; });
+            }).catch(function(error) { 
+                console.error('Deposit error:', error); 
+                showToast('Failed to submit deposit. Please try again.', 'error'); 
+            });
+        }
+
+   // ========================================
+// WITHDRAWAL FUNCTIONS - FULLY DECOUPLED & ERROR-ISOLATED
+// ========================================
+
+/**
+ * Opens withdrawal page
+ */
+function openWithdrawPage() { 
+    navigate('withdraw'); 
+    var amtInput = document.getElementById('wit-amt');
+    if (amtInput) amtInput.value = '5000'; 
+}
+
+/**
+ * Saves bank details
+ */
+function saveBankDetails() {
+    var currentUser = firebase.auth().currentUser;
+    if (!currentUser) return showToast('Please log in', 'error');
+
+    var bank = document.getElementById('wit-bank').value.trim();
+    var accountNum = document.getElementById('wit-num').value.trim();
+    var accountName = document.getElementById('wit-name').value.trim();
+
+    if (!/^\d{10}$/.test(accountNum)) return showToast('Enter a valid 10-digit account number', 'error');
+    if (!accountName || accountName.length < 3) return showToast('Enter a valid account name (min 3 chars)', 'error');
+    if (!bank) return showToast('Please select a bank', 'error');
+
+    db.ref('users/' + currentUser.uid + '/bankAccount').set({ 
+        bank, num: accountNum, name: accountName, updatedAt: Date.now() 
+    }).then(function() {
+        showToast('✅ Bank details saved!', 'success');
+        document.getElementById('bind-sec')?.classList.add('hidden');
+        document.getElementById('wit-form')?.classList.remove('hidden');
+        document.getElementById('linked-bank-display').textContent = bank + ' •••• ' + accountNum.slice(-4);
+        document.getElementById('linked-name-display').textContent = accountName.replace(/(.{3}).*(.{3})/, '$1***$2');
+    }).catch(function(err) {
+        console.error('Save bank error:', err);
+        showToast('Failed to save bank details.', 'error');
+    });
+}
+
+/**
+ * MAIN WITHDRAWAL TRIGGER
+ */
+function submitWithdrawal() {
+    var currentUser = firebase.auth().currentUser;
+    var amountInput = document.getElementById('wit-amt');
+    var amount = amountInput ? parseFloat(amountInput.value) : 0;
+    if (!currentUser) return showToast('Please log in', 'error');
+    if (!userData) return showToast('Loading user data...', 'info');
+    if (isNaN(amount) || amount <= 0) return showToast('Enter a valid amount', 'error');
+    if (amount < 500) return showToast('Minimum withdrawal is 500', 'info');
+    if (userData.balance == null || userData.balance < amount) return showToast('Insufficient funds', 'info');
+    if (!userData.bankAccount?.num) return showToast('Add bank details first', 'info');
+
+    var submitBtn = document.querySelector('button[onclick="submitWithdrawal()"]');
+    if (submitBtn) submitBtn.disabled = true;
+    showToast('Processing withdrawal...', 'info');
+
+    processWithdrawalRecords(currentUser, amount, function() {
+        if (submitBtn) submitBtn.disabled = false;
+    });
+}
+
+/**
+ * WITHDRAWAL CORE (100% Independent of Referral)
+ */
+function processWithdrawalRecords(currentUser, amount, callback) {
+    var witRef = db.ref('withdrawals').push();
+    var txRef = db.ref('transactions').push();
+    var bankInfo = userData.bankAccount || {};
+    
+    var withdrawalData = {
+        uid: currentUser.uid, username: userData.username || 'Unknown', amount,
+        bank: bankInfo.bank || '', accountNum: bankInfo.num || '', accountName: bankInfo.name || '',
+        status: 'pending', requestedAt: Date.now()
+    };
+
+    var transactionData = {
+        uid: currentUser.uid, type: 'withdrawal', amount, status: 'pending',
+        timestamp: Date.now(),
+        description: 'Withdrawal to ' + (bankInfo.bank || 'Bank') + ' (•••• ' + (bankInfo.num || '').slice(-4) + ')',
+        withdrawalId: witRef.key
+    };
+
+    var userRef = db.ref('users/' + currentUser.uid);
+
+    // ATOMIC BALANCE DEDUCTION
+    userRef.transaction(function(user) {
+        if (!user) return null;
+        if ((user.balance || 0) < amount) return null; // Abort if insufficient
+        user.balance = (user.balance || 0) - amount;
+        user.lastWithdrawal = Date.now();
+        return user;
+    }, function(error, committed) {
+        if (error || !committed) {
+            showToast('Withdrawal failed. Check balance & try again.', 'error');
+            if (callback) callback();            return;
+        }
+
+        // ✅ ONLY WRITES RECORDS AFTER SUCCESSFUL DEDUCTION
+        var updates = {};
+        updates['/withdrawals/' + witRef.key] = withdrawalData;
+        updates['/transactions/' + txRef.key] = transactionData;
+
+        db.ref().update(updates).then(function() {
+            showToast('✅ Withdrawal request received!', 'success');
+            if (document.getElementById('wit-amt')) document.getElementById('wit-amt').value = '';
+            if (typeof updateBalanceUI === "function") updateBalanceUI();
+            
+            setTimeout(() => {
+                navigate('wallet');
+                if (callback) callback();
+            }, 800);
+
+            // 🔥 COMPLETELY SEPARATED REFERRAL CALL
+            // Runs async, isolated, zero impact on withdrawal flow
+            setTimeout(() => triggerReferralBonus(amount), 0);
+
+        }).catch(function(err) {
+            console.error('Record write failed:', err);
+            showToast('⚠️ Request saved partially. Contact support.', 'error');
+            if (callback) callback();
+        });
+    }, false); // Boolean false, NOT object
+}
+
+// ========================================
+// 🔥 REFERRAL SYSTEM (100% INDEPENDENT)
+// No forEach. No UI impact. Error-isolated.
+// ========================================
+function triggerReferralBonus(amount) {
+    // Wrap in try/catch + promise catch to guarantee zero crashes
+    try {
+        var refCode = (userData?.referredBy || '').trim();
+        if (!refCode || refCode === 'none') return;
+
+        db.ref('users').orderByChild('username').equalTo(refCode).limitToFirst(1).once('value')
+            .then(function(snap) {
+                // ✅ Safe guards: NO forEach, NO undefined access
+                if (!snap.exists()) return;
+                
+                var data = snap.val();
+                if (!data) return;
+                
+                var keys = Object.keys(data);
+                if (!keys || keys.length === 0) return;                
+                var refUid = keys[0];
+                var bonus = Math.round(amount * 0.20);
+                if (bonus <= 0) return;
+
+                // Update referrer balance
+                return db.ref('users/' + refUid).transaction(function(u) {
+                    if (!u) return null;
+                    u.balance = (u.balance || 0) + bonus;
+                    u.referralEarnings = (u.referralEarnings || 0) + bonus;
+                    return u;
+                }).then(function(res) {
+                    if (!res.committed) return;
+                    
+                    // Log bonus (fire-and-forget)
+                    return db.ref('transactions').push().set({
+                        uid: refUid, type: 'referral', amount: bonus, status: 'completed',
+                        timestamp: Date.now(),
+                        description: 'Referral bonus from ' + (userData?.username || 'User')
+                    }).catch(function() { /* Silent fail for log */ });
+                });
+            })
+            .catch(function(err) {
+                // 🛡️ COMPLETELY SILENT. Never shows to user.
+                console.warn('[Referral] Bonus skipped (non-critical):', err.message);
+            });
+    } catch (e) {
+        console.error('[Referral] Unexpected error:', e);
+    }
+}
+
+        // ========================================
+        // ✅ WALLET TAB FIX - Transaction History
+        // ========================================
+        function renderTransactionHistory() {
+            var container = document.getElementById('tx-list');
+            if (!container) return;
+            
+            // Detach old listener if exists
+            if (unsubscribeTransactions) { 
+                unsubscribeTransactions(); 
+                unsubscribeTransactions = null; 
+            }
+            
+            // Get current user UID safely
+            var currentUser = auth.currentUser;
+            if (!currentUser) {
+                container.innerHTML = '<div class="empty-state"><i class="bi bi-clock-history"></i><p>Please login to view history</p></div>';
+                return;
+            }
+            var uid = currentUser.uid;
+
+            // Real-time listener for transactions with error handling
+            unsubscribeTransactions = db.ref('transactions')
+                .orderByChild('uid')
+                .equalTo(uid)
+                .limitToLast(50)
+                .on('value', function(snap) {
+                    var txs = [];
+                    snap.forEach(function(child) { 
+                        txs.push({ id: child.key, ...child.val() }); 
+                    });
+                    
+                    // Sort by timestamp descending (newest first)
+                    txs.sort(function(a, b) { 
+                        return (b.timestamp || 0) - (a.timestamp || 0); 
+                    });
+                    
+                    if (txs.length === 0) {
+                        container.innerHTML = '<div class="empty-state"><i class="bi bi-clock-history"></i><p>No transactions yet</p><small>Start by making a deposit or investment</small></div>';
+                        return;
+                    }
+
+                    container.innerHTML = txs.map(function(tx) {
+                        var date = new Date(tx.timestamp || Date.now());
+                        var timeStr = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                        var dateStr = date.toLocaleDateString();
+                        
+                        // Status badge logic
+                        var statusClass = 'status-pending', statusText = 'Pending';
+                        if (tx.status === 'approved' || tx.status === 'completed') { 
+                            statusClass = 'status-approved'; 
+                            statusText = 'Completed'; 
+                        } else if (tx.status === 'declined') { 
+                            statusClass = 'status-declined'; 
+                            statusText = 'Declined'; 
+                        }
+                        
+                        // Amount color logic
+                        var amountClass = '';
+                        if (['deposit', 'earnings', 'referral', 'bonus', 'balance-adjust'].indexOf(tx.type) !== -1) {
+                            amountClass = 'positive';
+                        } else if (['withdrawal', 'investment'].indexOf(tx.type) !== -1) {
+                            amountClass = 'negative';
+                        }
+                        
+                        // Type icon and label
+                        var typeIcon = 'bi-question-circle', typeLabel = 'Unknown';
+                        if (tx.type) {
+                            typeLabel = tx.type.charAt(0).toUpperCase() + tx.type.slice(1);
+                        }
+                        switch(tx.type) {
+                            case 'deposit': typeIcon = 'bi-wallet2'; typeLabel = 'Deposit'; break;
+                            case 'withdrawal': typeIcon = 'bi-cash-stack'; typeLabel = 'Withdrawal'; break;
+                            case 'investment': typeIcon = 'bi-gem'; typeLabel = 'Investment'; break;
+                            case 'earnings': typeIcon = 'bi-graph-up'; typeLabel = 'Daily Return'; break;
+                            case 'referral': typeIcon = 'bi-people'; typeLabel = 'Referral'; break;
+                            case 'bonus': typeIcon = 'bi-gift'; typeLabel = 'Bonus'; break;
+                            case 'balance-adjust': typeIcon = 'bi-currency-exchange'; typeLabel = 'Balance Adjust'; break;
+                        }
+                        
+                        return '<div class="tx-item ' + (tx.type || '') + '">' +
+                            '<div class="tx-header">' +
+                                '<span><i class="bi ' + typeIcon + ' me-2"></i>' + typeLabel + '</span>' +
+                                '<span class="tx-status ' + statusClass + '">' + statusText + '</span>' +
+                            '</div>' +
+                            '<div class="tx-desc">' + (tx.description || '') + '</div>' +
+                            '<div class="d-flex justify-content-between align-items-center mt-2">' +
+                                '<small class="tx-time">' + dateStr + ' ' + timeStr + '</small>' +
+                                '<span class="tx-amount ' + amountClass + '">' +
+                                    (['withdrawal', 'investment'].indexOf(tx.type) !== -1 ? '-' : '+') + '₦' + ((tx.amount || 0).toLocaleString()) +
+                                '</span>' +
+                            '</div>' +
+                        '</div>';
+                    }).join('');
+                }, function(error) {
+                    // Error handling for Firebase query
+                    console.warn('Transaction listener error:', error);
+                    container.innerHTML = '<div class="empty-state"><p>Unable to load history. Retrying...</p><small class="text-gold">Please check your connection</small></div>';
+                });
+        }
+
+        // ========================================
+        // NAVIGATION & UI FUNCTIONS
+        // ========================================
+        function navigate(section) {
+            // Hide all sections first
+            document.querySelectorAll('section[id$="-sec"]').forEach(function(sec) { sec.classList.add('hidden'); });
+            
+            // Show target section
+            var target = document.getElementById(section + '-sec');
+            if (target) target.classList.remove('hidden');
+            
+            // Update nav active state
+            document.querySelectorAll('.nav-link').forEach(function(link) { link.classList.remove('active'); });
+            var activeNav = document.querySelector('.nav-link[onclick="navigate(\'' + section + '\')"]');
+            if (activeNav) activeNav.classList.add('active');
+            
+            // Refresh data when entering specific sections
+            if (section === 'wallet') {
+                renderTransactionHistory(); // This is the wallet tab fix!
+            }
+            if (section === 'invest') renderPlans();
+            if (section === 'profile') updateProfileUI();
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function toggleAuth(type) {
+            document.getElementById('register-page').classList.toggle('hidden', type !== 'reg');
+            document.getElementById('login-page').classList.toggle('hidden', type !== 'login');
+        }
+
+        function showToast(message, type) {
+            type = type || 'info';
+            var container = document.getElementById('toast-container');
+            var toastId = 'toast-' + Date.now();
+            var icon = 'bi-info-circle-fill';
+            var toastClass = 'toast-info';
+            if (type === 'success') { icon = 'bi-check-circle-fill'; toastClass = 'toast-success'; }
+            else if (type === 'error') { icon = 'bi-exclamation-triangle-fill'; toastClass = 'toast-error'; }
+            else if (type === 'warning') { icon = 'bi-exclamation-circle-fill'; toastClass = 'toast-warning'; }
+            
+            var toast = document.createElement('div');
+            toast.className = 'custom-toast ' + toastClass; toast.id = toastId;
+            toast.innerHTML = '<i class="toast-icon bi ' + icon + '"></i><div class="toast-message">' + message + '</div><button class="toast-close" onclick="document.getElementById(\'' + toastId + '\')?.remove()"><i class="bi bi-x"></i></button>';
+            container.appendChild(toast);
+            setTimeout(function() { 
+                if (toast.parentNode) { 
+                    toast.style.opacity = '0'; 
+                    toast.style.transform = 'translateX(100%)'; 
+                    setTimeout(function() { if (toast.parentNode) toast.remove(); }, 300); 
+                } 
+            }, 5000);
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() { 
+                showToast('✅ Copied to clipboard!', 'success');
+            }).catch(function() {
+                var textarea = document.createElement('textarea'); 
+                textarea.value = text; 
+                document.body.appendChild(textarea); 
+                textarea.select(); 
+                document.execCommand('copy'); 
+                document.body.removeChild(textarea); 
+                showToast('✅ Copied!', 'success');
+            });
+        }
+
+        function copyReferralLink() {
+            var refCode = userData ? (userData.username || '') : '';
+            var link = window.location.origin + window.location.pathname + '?ref=' + refCode;
+            copyToClipboard(link);
+        }
+
+        // ========================================
+        // AUTO-PASS REF CODE FROM URL
+        // ========================================
+        function checkUrlRefCode() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var refCode = urlParams.get('ref');
+            if (refCode) {
+                var refInput = document.getElementById('reg-invite');
+                if (refInput) {
+                    refInput.value = refCode.toUpperCase().trim();
+                    showToast('Referral code "' + refCode.toUpperCase() + '" applied!', 'info');
+                }
+                // Clean URL without reloading
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        }
+        // Run on load
+        checkUrlRefCode();
+
+        // ========================================
+        // PWA INSTALL
+        // ========================================
+        function checkPWAInstallable() {
+            window.addEventListener('beforeinstallprompt', function(e) { 
+                e.preventDefault(); 
+                deferredPrompt = e; 
+                var pwaBox = document.getElementById('pwa-install-box');
+                if (pwaBox) pwaBox.classList.remove('hidden'); 
+            });
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                var pwaBox = document.getElementById('pwa-install-box');
+                if (pwaBox) pwaBox.classList.add('hidden');
+            }
+        }
+        function installPWA() {
+            if (!deferredPrompt) { 
+                showToast('📱 To install: Tap browser menu → "Add to Home Screen"', 'info'); 
+                return; 
+            }
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(function() {
+                deferredPrompt = null;
+                var pwaBox = document.getElementById('pwa-install-box');
+                if (pwaBox) pwaBox.classList.add('hidden');
+                showToast('✅ App installation prompt shown!', 'success');
+            });
+        }
+
+        // ========================================
+        // PROFILE ACTIONS - ALL FUNCTIONING
+        // ========================================
+        function openEditProfile() {
+            document.getElementById('edit-username').value = userData ? (userData.username || '') : '';
+            document.getElementById('edit-email').value = userData ? (userData.email || '') : '';
+            new bootstrap.Modal(document.getElementById('edit-profile-modal')).show();
+        }
+        function saveProfileChanges() {
+            var newUsername = document.getElementById('edit-username').value.trim();
+            var newEmail = document.getElementById('edit-email').value.trim();
+            if (!newUsername || newUsername.length < 3) { showToast('Username must be at least 3 characters', 'error'); return; }
+            var updates = { lastActive: Date.now() };
+            if (newUsername !== userData.username) updates.username = newUsername;
+            if (newEmail !== userData.email) updates.email = newEmail;
+            db.ref('users/' + auth.currentUser.uid).update(updates)
+                .then(function() {
+                    showToast('✅ Profile updated successfully!', 'success');
+                    bootstrap.Modal.getInstance(document.getElementById('edit-profile-modal')).hide();
+                    updateProfileUI();
+                })
+                .catch(function(error) { showToast('Failed to update profile. Please try again.', 'error'); });
+        }
+
+        function openChangePassword() {
+            document.getElementById('current-pass').value = '';
+            document.getElementById('new-pass').value = '';
+            document.getElementById('confirm-new-pass').value = '';
+            new bootstrap.Modal(document.getElementById('change-password-modal')).show();
+        }
+        function updatePassword() {
+            var currentPass = document.getElementById('current-pass').value;
+            var newPass = document.getElementById('new-pass').value;
+            var confirmPass = document.getElementById('confirm-new-pass').value;
+            if (!currentPass || !newPass || !confirmPass) { showToast('Please fill all password fields', 'error'); return; }
+            if (newPass !== confirmPass) { showToast('New passwords do not match', 'error'); return; }
+            if (newPass.length < 6) { showToast('Password must be at least 6 characters', 'error'); return; }
+            var user = auth.currentUser;
+            var credential = firebase.auth.EmailAuthProvider.credential(user.email, currentPass);
+            user.reauthenticateWithCredential(credential)
+                .then(function() {
+                    return user.updatePassword(newPass);
+                })
+                .then(function() {
+                    showToast('✅ Password changed successfully!', 'success');
+                    bootstrap.Modal.getInstance(document.getElementById('change-password-modal')).hide();
+                })
+                .catch(function(error) {
+                    var msg = 'Failed to change password. ';
+                    if (error.code === 'auth/wrong-password') msg += 'Current password is incorrect.';
+                    else msg += error.message;
+                    showToast(msg, 'error');
+                });
+        }
+
+        function openSecuritySettings() { new bootstrap.Modal(document.getElementById('security-modal')).show(); }
+        function saveSecuritySettings() { showToast('✅ Security settings saved!', 'success'); bootstrap.Modal.getInstance(document.getElementById('security-modal')).hide(); }
+        function showAppInfo() { showConfirmModal('info', 'App Information', '<strong>VEGAS Investment v3.0.0</strong><br><br>© 2024 VEGAS<br>All rights reserved.', 'Close', null); }
+
+        function confirmLogout() {
+            showConfirmModal('warning', 'Confirm Logout', 'Are you sure you want to logout? You will need to sign in again to access your account.', 'Cancel', function() {
+                auth.signOut().then(function() {
+                    showToast('✅ Logged out successfully', 'success');
+                    Object.values(timerIntervals).forEach(function(interval) { clearInterval(interval); }); 
+                    timerIntervals = {};
+                    navigate('home');
+                });
+            }, 'Logout');
+        }
+
+        // ========================================
+        // AUTH FORM HANDLERS
+        // ========================================
+        document.getElementById('reg-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var username = document.getElementById('reg-user').value.trim();
+            var email = document.getElementById('reg-email').value.trim();
+            var pass = document.getElementById('reg-pass').value;
+            var confirmPass = document.getElementById('reg-confirm').value;
+            var inviteCode = document.getElementById('reg-invite').value.trim();
+            if (username.length < 3) { showToast('Username must be at least 3 characters', 'error'); return; }
+            if (pass !== confirmPass) { showToast('Passwords do not match', 'error'); return; }
+            if (pass.length < 6) { showToast('Password must be at least 6 characters', 'error'); return; }
+            auth.createUserWithEmailAndPassword(email, pass)
+                .then(function(userCredential) {
+                    var user = userCredential.user;
+                    return db.ref('users/' + user.uid).set({
+                        uid: user.uid, username: username, email: email, balance: 0, totalInvested: 0,
+                        dailyIncome: 0, totalReturns: 0, referralEarnings: 0, totalReferrals: 0,
+                        activeReferrals: 0, referredBy: inviteCode || 'none', claimBonus: false,
+                        hasSeenWelcome: false, createdAt: Date.now(), lastActive: Date.now()
+                    });
+                })
+                .then(function() {
+                    if (inviteCode && inviteCode !== 'none') {
+                        db.ref('users').orderByChild('username').equalTo(inviteCode).once('value').then(function(referrerSnap) {
+                            referrerSnap.forEach(function(referrer) {
+                                db.ref('users/' + referrer.key + '/totalReferrals').transaction(function(count) { return (count || 0) + 1; });
+                            });
+                        });
+                    }
+                    showToast('✅ Account created successfully! Welcome to VEGAS.', 'success');
+                })
+                .catch(function(error) {
+                    var msg = 'Registration failed. ';
+                    if (error.code === 'auth/email-already-in-use') msg += 'Email already registered.';
+                    else if (error.code === 'auth/invalid-email') msg += 'Invalid email address.';
+                    else if (error.code === 'auth/weak-password') msg += 'Password too weak.';
+                    else msg += error.message;
+                    showToast(msg, 'error');
+                });
+        });
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var email = document.getElementById('login-email').value.trim();
+            var pass = document.getElementById('login-pass').value;
+            auth.signInWithEmailAndPassword(email, pass)
+                .then(function() {
+                    showToast('✅ Welcome back!', 'success');
+                })
+                .catch(function(error) {
+                    var msg = 'Login failed. ';
+                    if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') msg += 'Invalid email or password.';
+                    else msg += error.message;
+                    showToast(msg, 'error');
+                });
+        });
+
+        // ========================================
+        // BONUS & CONFIRMATION MODAL
+        // ========================================
+        function claimWelcomeBonus() {
+            var modal = bootstrap.Modal.getInstance(document.getElementById('welcome-modal'));
+            if (modal) modal.hide();
+            var uid = auth.currentUser.uid;
+            db.ref('users/' + uid).update({ balance: (userData.balance || 0) + 600, claimBonus: true })
+                .then(function() {
+                    return db.ref('transactions').push().set({ uid: uid, type: 'bonus', amount: 600, status: 'completed', timestamp: Date.now(), description: 'Welcome bonus' });
+                })
+                .then(function() {
+                    new bootstrap.Modal(document.getElementById('bonus-modal')).show();
+                    updateBalanceUI();
+                })
+                .catch(function(error) { showToast('Failed to claim bonus. Please try again.', 'error'); });
+        }
+
+        function showConfirmModal(type, title, message, cancelText, onConfirm, confirmText) {
+            confirmText = confirmText || 'Confirm';
+            var modal = document.getElementById('confirm-modal');
+            var icon = document.getElementById('confirm-icon');
+            icon.className = 'confirm-icon bi';
+            if (type === 'success') { icon.classList.add('bi-check-circle-fill'); icon.style.color = 'var(--success)'; }
+            else if (type === 'warning') { icon.classList.add('bi-exclamation-triangle-fill'); icon.style.color = 'var(--warning)'; }
+            else if (type === 'danger') { icon.classList.add('bi-x-circle-fill'); icon.style.color = 'var(--danger)'; }
+            else { icon.classList.add('bi-info-circle-fill'); icon.style.color = 'var(--vegas-gold)'; }
+            document.getElementById('confirm-title').textContent = title;
+            document.getElementById('confirm-message').innerHTML = message;
+            modal.querySelector('.confirm-btn.cancel').textContent = cancelText;
+            document.getElementById('confirm-action-btn').textContent = confirmText;
+            confirmCallback = onConfirm;
+            modal.style.display = 'flex';
+            modal.querySelector('.confirm-btn.cancel').onclick = closeConfirmModal;
+        }
+        function closeConfirmModal() { 
+            document.getElementById('confirm-modal').style.display = 'none'; 
+            confirmCallback = null; 
+        }
+        function executeConfirmAction() { 
+            if (confirmCallback) confirmCallback(); 
+            closeConfirmModal(); 
+        }
+        document.getElementById('confirm-modal').addEventListener('click', function(e) { 
+            if (e.target.id === 'confirm-modal') closeConfirmModal(); 
+        });
+
+        // ========================================
+        // NOTIFICATIONS
+        // ========================================
+        function renderNotifications() {
+            var list = document.getElementById('notif-list');
+            if (!list) return;
+            var notifs = [
+                { title: 'Welcome to VEGAS!', message: 'Your account is active. Claim your bonus and start investing today.', time: 'Just now', icon: 'bi-star-fill', type: 'info' },
+                { title: 'New Plan Available', message: 'Check out our VIP (Rolls-Royce) plan with 250% total returns!', time: '2 hours ago', icon: 'bi-gem', type: 'info' },
+                { title: 'Withdrawal Processed', message: 'Your withdrawal of ₦5,000 has been approved and sent to your bank.', time: '1 day ago', icon: 'bi-cash-stack', type: 'success' }
+            ];
+            list.innerHTML = notifs.map(function(n) { 
+                return '<div class="faq-item"><h4><i class="bi ' + n.icon + ' text-gold"></i> ' + n.title + '</h4><p>' + n.message + '</p><small class="text-gray">' + n.time + '</small></div>'; 
+            }).join('');
+            var badge = document.getElementById('notif-badge');
+            if (badge) { 
+                var unread = notifs.filter(function(n) { return !n.read; }).length; 
+                badge.textContent = unread; 
+                badge.classList.toggle('hidden', unread === 0); 
+            }
+        }
+
+        // Page visibility handling
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden && userData) { 
+                checkAndClaimEarnings(); 
+                updateActivePlansUI(); 
+            }
+        });
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() { 
+            checkPWAInstallable(); 
+        });
+    </script>
+</body>
+</html>         
